@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Listado de Emisoras</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .card {
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+
+      .card-title {
+        color: #ffffff;
+      }
+
+      .btn-primary {
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+
+      .btn-primary:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+      }
+
+      .btn-secondary {
+        background-color: #ffffff;
+        color: #dc3545;
+        border-color: #ffffff;
+      }
+
+      .btn-secondary:hover {
+        background-color: #f8f9fa;
+        color: #dc3545;
+        border-color: #f8f9fa;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Listado de Emisoras</h2>
+      <ul id="listaEmisoras" class="list-group">
+        <!-- Aquí se cargarán las emisoras -->
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Función para cargar y mostrar emisoras
+        function cargarEmisoras() {
+          $.ajax({
+            url: "/api/buscaremisoras", // Cambiado a api/buscaremisoras
+            type: "GET",
+            success: function (emisoras) {
+              var listaEmisoras = $("#listaEmisoras");
+              listaEmisoras.empty();
+
+              emisoras.forEach(function (emisora) {
+                listaEmisoras.append(`
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>${emisora.nombre}</strong>
+                      <p>Fecha de Creación: ${emisora.fechaCreacion}</p>
+                    </div>
+                    <div>
+                      <a href="${emisora.pdfPath}" class="btn btn-secondary btn-sm" target="_blank">Descargar PDF</a>
+                      <audio controls>
+                        <source src="${emisora.audioPath}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
+                  </li>
+                        `);
+              });
+            },
+            error: function (error) {
+              console.error("Error al cargar emisoras:", error);
+            },
+          });
+        }
+
+        // Llamada a la función de cargarEmisoras
+        cargarEmisoras();
+      });
+    </script>
+  </body>
+</html>
