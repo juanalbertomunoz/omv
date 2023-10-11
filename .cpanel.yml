@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/omvpubli/public_html/catalogos
+    - export DEPLOYPATH=/home/omvpubli/public_html/ecompublicidad.com
     - /bin/cp -R * $DEPLOYPATH
     - /bin/rm -rf node_modules # Eliminar node_modules si existen
     - /bin/rm -rf .git # Eliminar el directorio .git
