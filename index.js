@@ -1,8 +1,10 @@
 const express = require('express');
 //const mongoose = require('mongoose');
 const routes = require('./routes/emisoras');
-const app = express();
+const path = require('path');
 const dbConnect = require("./config/mongo")
+
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 //mongoose.connect('tu_link_de_conexión_a_MongoDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -15,6 +17,19 @@ app.get('/', (req, res, next) => {
 app.get('/buscar', (req, res, next) => {
   res.render("buscador")
 });
+// Ruta para descargar archivo
+app.get('/uploads/:filename', (req, res) => {
+  console.log("req.params.filename")
+  const filePath = path.join(__dirname, 'uploads', req.params.filename);
+
+  res.download(filePath, (err) => {
+    if (err) {
+      console.error('Error al descargar el archivo:', err);
+      res.status(500).json({ error: 'Error al descargar el archivo' });
+    }
+  });
+});
+
 /*
 app.use('/api', (req, res, next) => {
   console.log("1");
