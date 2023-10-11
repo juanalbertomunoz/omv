@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
 app.use(express.json());
-app.get('/', (req, res, next) => {
+app.get('/crear', (req, res, next) => {
   res.render("crear")
 });
 app.get('/buscar', (req, res, next) => {
