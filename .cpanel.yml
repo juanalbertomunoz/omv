@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/omvpubli/public_html/omvradio
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/rm -rf node_modules # Eliminar node_modules si existen
+    - /bin/rm -rf .git # Eliminar el directorio .git
+    - cd $DEPLOYPATH
+    - /home/omvpubli/.nvm/versions/node/v14.17.5/bin/npm install --production # Instalar solo las dependencias de producción
