@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //mongoose.connect('tu_link_de_conexión_a_MongoDB', { useNewUrlParser: true, useUnifiedTopology: true });
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/views'));
 app.use(express.json());
