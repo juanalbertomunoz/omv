@@ -35,7 +35,7 @@ const buscaremisora = async (req, res) => {
       };
     });
 
-    console.log(emisorasConRutasPublicas, emisorasConRutasPublicas[0].pdf); // Agregado
+    //console.log(emisorasConRutasPublicas, emisorasConRutasPublicas[0].pdf); // Agregado
 
     res.json(emisorasConRutasPublicas);
   } catch (error) {
