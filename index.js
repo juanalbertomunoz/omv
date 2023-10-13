@@ -1,5 +1,5 @@
 const express = require('express');
-//const mongoose = require('mongoose');
+//const mongoose = requiresssssssss('mongoose');
 const routes = require('./routes/emisoras');
 const path = require('path');
 const dbConnect = require("./config/mongo")
